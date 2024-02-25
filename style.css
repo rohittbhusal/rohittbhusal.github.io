@@ -16,7 +16,7 @@ body{
   display: none;
 }
 
-.project:hover + .hide {
+.projectsHover:hover + .hide {
   display: block;
   color: red;
   font-weight: bold;
