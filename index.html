@@ -316,43 +316,57 @@
   const scrollContainer = document.querySelector('.certs-list');
 
   scrollContainer.addEventListener('wheel', (evt) => {
-    // Prevent the default vertical scroll behavior
+  
     evt.preventDefault();
     
-    // Cross-browser wheel delta
+   
     const deltaX = evt.deltaY || evt.detail || evt.wheelDelta;
-    scrollContainer.scrollLeft += deltaX * 1; // Multiplier to control scroll speed
-  }, { passive: false }); // The `passive: false` parameter allows us to call `preventDefault`
+    scrollContainer.scrollLeft += deltaX * 1; 
+  }, { passive: false }); 
 });
 </script>
 <script>
   function openOverlay(src) {
-  // Get the overlay elements
+ 
   const overlay = document.getElementById('image-overlay');
   const expandedImg = document.getElementById('expanded-img');
   
-  // Set the source of the expanded image and show the overlay
+
   expandedImg.src = src;
   overlay.classList.add('show');
 }
 
 function closeOverlay() {
-  // Get the overlay element and hide it
+  
   const overlay = document.getElementById('image-overlay');
   overlay.classList.remove('show');
 }
 
-// Add click event listener to each card
+
 document.querySelectorAll('.certs-list img').forEach(img => {
   img.addEventListener('click', () => openOverlay(img.src));
 });
 
-// Close overlay when clicking outside the image
+
 document.getElementById('image-overlay').addEventListener('click', (e) => {
   if (e.target === e.currentTarget) closeOverlay();
 });
-
-
 </script>
+<script>
+  
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const projectList = document.querySelector('.project-list'); 
+  
+   
+    projectList.addEventListener('wheel', (e) => {
+      
+      e.preventDefault();
+  
+      
+      projectList.scrollLeft += e.deltaY;
+    }, { passive: false });
+  });
+  </script>
+  
 </body>
 </html>
