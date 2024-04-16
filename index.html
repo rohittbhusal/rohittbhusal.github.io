@@ -85,7 +85,7 @@
   </div>
 </div>
 
-<!-- Project Section -->
+<!-- licert-->
 <div id="certs">
   <div class="container">
     <div class="sub-title" style="font-weight: bold;">Licenses & Certificates
@@ -171,6 +171,12 @@
             <p style="margin: 5px;">Course</p>
           </p>
         </div>
+        </div>
+        <!-- Image Overlay Element -->
+        <div id="image-overlay" class="image-overlay" onclick="closeOverlay()">
+          <div class="image-overlay-content">
+            <img id="expanded-img" src="" alt="Expanded image">
+          </div>
         </div>
       </div>
     </div>
@@ -304,6 +310,49 @@
     backSpeed: 150,
     loop: true
   });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+  const scrollContainer = document.querySelector('.certs-list');
+
+  scrollContainer.addEventListener('wheel', (evt) => {
+    // Prevent the default vertical scroll behavior
+    evt.preventDefault();
+    
+    // Cross-browser wheel delta
+    const deltaX = evt.deltaY || evt.detail || evt.wheelDelta;
+    scrollContainer.scrollLeft += deltaX * 1; // Multiplier to control scroll speed
+  }, { passive: false }); // The `passive: false` parameter allows us to call `preventDefault`
+});
+</script>
+<script>
+  function openOverlay(src) {
+  // Get the overlay elements
+  const overlay = document.getElementById('image-overlay');
+  const expandedImg = document.getElementById('expanded-img');
+  
+  // Set the source of the expanded image and show the overlay
+  expandedImg.src = src;
+  overlay.classList.add('show');
+}
+
+function closeOverlay() {
+  // Get the overlay element and hide it
+  const overlay = document.getElementById('image-overlay');
+  overlay.classList.remove('show');
+}
+
+// Add click event listener to each card
+document.querySelectorAll('.certs-list img').forEach(img => {
+  img.addEventListener('click', () => openOverlay(img.src));
+});
+
+// Close overlay when clicking outside the image
+document.getElementById('image-overlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeOverlay();
+});
+
+
 </script>
 </body>
 </html>
